@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Empire Tycoon | Build Your Legacy</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>PIZZA<span>EMPIRE</span></h1>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <span class="label">Total Profit</span>
+                    <span id="cash" class="value">$0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="label">Pizzas Served</span>
+                    <span id="served" class="value">0</span>
+                </div>
+            </div>
+
+            <nav class="tabs">
+                <button class="tab-btn active" data-tab="upgrades">Upgrades</button>
+                <button class="tab-btn" data-tab="staff">Staff</button>
+                <button class="tab-btn" data-tab="locations">Locations</button>
+            </nav>
+
+            <div class="upgrade-list" id="upgrade-container">
+                <!-- Upgrades/Staff will be injected here -->
+            </div>
+        </aside>
+
+        <main class="game-area">
+            <header class="game-header">
+                <div class="multiplier">Multiplier: <span id="multiplier">1.0x</span></div>
+                <div class="rank">Rank: <span id="rank">Novice Chef</span></div>
+            </header>
+
+            <div class="kitchen">
+                <div class="production-line">
+                    <div class="station counter-station">
+                        <div class="icon">🏪</div>
+                        <span>Register</span>
+                        <div id="cashier-slot" class="staff-indicator"></div>
+                    </div>
+                    <div class="arrow">➡️</div>
+                    <div class="station dough-station" id="dough-btn">
+                        <div class="icon">🍞</div>
+                        <span>Prep Table</span>
+                        <div class="progress-bar"><div class="fill"></div></div>
+                    </div>
+                    <div class="arrow">➡️</div>
+                    <div class="station oven-station">
+                        <div class="icon">🔥</div>
+                        <span>Stone Ovens</span>
+                        <div id="active-pizzas" class="pizza-slots"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="restaurant-floor">
+                <div class="tables" id="tables-container">
+                    <!-- Tables will be generated here -->
+                </div>
+                <div class="customer-queue" id="customer-queue">
+                    <!-- Customers will appear here -->
+                </div>
+            </div>
+
+            <div class="notifications" id="notifs"></div>
+        </main>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
