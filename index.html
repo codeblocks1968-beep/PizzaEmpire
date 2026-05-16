@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +7,26 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="app">
         <aside class="sidebar">
             <div class="logo">
                 <h1>PIZZA<span>EMPIRE</span></h1>
+            </div>
+
+            <!-- Theme Switcher -->
+            <div class="theme-switcher">
+                <span class="theme-label">🎨 Theme</span>
+                <div class="theme-grid">
+                    <button class="theme-btn active" data-theme="dark" title="Dark Mode">🌑</button>
+                    <button class="theme-btn" data-theme="sanrio" title="Sanrio">🌸</button>
+                    <button class="theme-btn" data-theme="galaxy" title="Galaxy">🌌</button>
+                    <button class="theme-btn" data-theme="retro" title="Retro Diner">🕹️</button>
+                    <button class="theme-btn" data-theme="forest" title="Forest">🌿</button>
+                    <button class="theme-btn" data-theme="candy" title="Candy Pop">🍬</button>
+                </div>
             </div>
             
             <div class="stats">
@@ -44,6 +57,18 @@
                 <div class="rank">Rank: <span id="rank">Novice Chef</span></div>
             </header>
 
+            <!-- Customer Order Banner -->
+            <div class="order-banner" id="order-banner" style="display:none;">
+                <div class="order-banner-inner">
+                    <span class="order-icon">📋</span>
+                    <div class="order-details">
+                        <span class="order-title">Customer Order</span>
+                        <span class="order-items" id="order-items-display"></span>
+                    </div>
+                    <div class="order-steps" id="order-steps"></div>
+                </div>
+            </div>
+
             <div class="kitchen">
                 <div class="production-line">
                     <div class="station counter-station">
@@ -62,6 +87,33 @@
                         <div class="icon">🔥</div>
                         <span>Stone Ovens</span>
                         <div id="active-pizzas" class="pizza-slots"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pizza Making Area (shown when clicking Prep Table) -->
+            <div class="pizza-maker" id="pizza-maker" style="display:none;">
+                <div class="pizza-maker-inner">
+                    <div class="pizza-canvas-wrap">
+                        <h3>🍕 Build Your Pizza</h3>
+                        <div class="pizza-canvas" id="pizza-canvas">
+                            <div class="pizza-base" id="pizza-base">
+                                <span class="pizza-base-label">Drop ingredients here!</span>
+                            </div>
+                        </div>
+                        <button class="bake-btn" id="bake-btn">🔥 Send to Oven!</button>
+                    </div>
+                    <div class="ingredients-panel">
+                        <h3>Ingredients</h3>
+                        <div class="step-progress" id="step-progress">
+                            <div class="step active" data-step="dough">1. Add Dough</div>
+                            <div class="step" data-step="sauce">2. Sauce</div>
+                            <div class="step" data-step="cheese">3. Cheese</div>
+                            <div class="step" data-step="toppings">4. Toppings</div>
+                        </div>
+                        <div class="ingredients-grid" id="ingredients-grid">
+                            <!-- Ingredients injected here -->
+                        </div>
                     </div>
                 </div>
             </div>
