@@ -572,7 +572,7 @@ const Game = {
 
     // ─── SAVE / LOAD ─────────────────────────────────────────
     save() {
-        localStorage.setItem('pizza_tycoon_v3_save', JSON.stringify({
+        localStorage.setItem(Auth.saveKey(), JSON.stringify({
             cash: this.cash,
             totalServed: this.totalServed,
             upgrades: this.upgrades,
@@ -581,7 +581,7 @@ const Game = {
     },
 
     load() {
-        const save = localStorage.getItem('pizza_tycoon_v3_save');
+        const save = localStorage.getItem(Auth.saveKey());
         if (save) {
             const data = JSON.parse(save);
             this.cash        = data.cash;
@@ -598,4 +598,13 @@ const Game = {
     },
 };
 
-window.onload = () => Game.init();
+window.onload = () => {
+    if (Auth.checkSession()) {
+        // Already logged in — inject badge and start game
+        AuthUI.injectUserBadge();
+        Game.init();
+    } else {
+        // Show auth screen first; it will call Game.init() on success
+        AuthUI.build();
+    }
+};
