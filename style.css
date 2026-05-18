@@ -1059,3 +1059,266 @@ body {
     background: rgba(239,68,68,0.22);
     border-color: rgba(239,68,68,0.5);
 }
+
+/* ============================================================
+   COLOR PICKER BUBBLES
+   ============================================================ */
+.color-picker-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.5rem;
+    margin-top: 0.4rem;
+}
+
+.color-bubble {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--bubble-color);
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    padding: 0;
+}
+
+.color-bubble:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5), 0 0 10px var(--bubble-color);
+}
+
+.color-bubble.active {
+    border-color: #f8fafc;
+    box-shadow: 0 0 15px var(--bubble-color), 0 4px 10px rgba(0, 0, 0, 0.4);
+    transform: scale(1.25);
+}
+
+/* ============================================================
+   DEVICE SELECTOR WIDGET
+   ============================================================ */
+.device-selector-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    padding: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    animation: slideDown 0.4s cubic-bezier(.34,1.56,.64,1);
+}
+
+.device-label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.device-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.4rem;
+}
+
+.device-btn {
+    background: var(--card-bg);
+    border: 2px solid transparent;
+    border-radius: 0.5rem;
+    width: 100%;
+    aspect-ratio: 1;
+    font-size: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.device-btn:hover {
+    transform: scale(1.15);
+    border-color: var(--glass-border);
+}
+
+.device-btn.active {
+    border-color: var(--accent);
+    box-shadow: 0 0 12px var(--accent-glow);
+    background: var(--accent-glow);
+}
+
+/* Orientation Picker Widget */
+.orientation-picker {
+    border-top: 1px dashed var(--glass-border);
+    padding-top: 0.5rem;
+    animation: slideDown 0.3s ease;
+}
+
+.orientation-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.3rem;
+}
+
+.orientation-btn {
+    flex: 1;
+    background: var(--card-bg);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 0.5rem;
+    color: var(--text-dim);
+    padding: 0.45rem;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    font-family: 'Outfit', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+}
+
+.orientation-btn:hover {
+    border-color: var(--accent);
+    color: var(--text);
+}
+
+.orientation-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* ============================================================
+   DEVICE SIMULATOR VIEWPORT MUTATIONS
+   ============================================================ */
+body.simulating-device #app {
+    background: radial-gradient(circle at center, #111827 0%, #030712 100%) !important;
+}
+
+/* Base style for centered simulated viewport */
+body.simulating-device .game-area {
+    margin: auto !important;
+    background: var(--gradient) !important;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 55px rgba(255, 107, 43, 0.15) !important;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    max-width: 95%;
+    overflow-y: auto;
+}
+
+/* 🕶️ VR Mode (Futuristic Sci-Fi curved HUD) */
+body.device-vr .game-area {
+    width: 92%;
+    height: 90vh;
+    border-radius: 3rem !important;
+    border: 5px solid #06b6d4 !important;
+    box-shadow: 0 0 60px rgba(6, 182, 212, 0.45), inset 0 0 35px rgba(6, 182, 212, 0.25) !important;
+    transform: perspective(1200px) rotateY(-5deg) rotateX(2deg) scale(0.96);
+    filter: saturate(1.25) contrast(1.05);
+}
+body.device-vr .game-area::before {
+    content: '🕶️ VR IMMERSIVE HUD';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
+    color: #06b6d4;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    background: rgba(6, 182, 212, 0.15);
+    padding: 0.2rem 0.8rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(6, 182, 212, 0.4);
+    z-index: 10;
+}
+
+/* 💻 Laptop Mode (Screen + Base) */
+body.device-laptop .game-area {
+    width: 82vw;
+    height: 72vh;
+    max-width: 960px;
+    max-height: 560px;
+    border-radius: 1.25rem 1.25rem 0.25rem 0.25rem !important;
+    border: 16px solid #475569 !important;
+    border-bottom: 22px solid #334155 !important;
+    position: relative;
+}
+/* Laptop Base */
+body.device-laptop .game-area::after {
+    content: '';
+    position: absolute;
+    bottom: -38px;
+    left: -8%;
+    width: 116%;
+    height: 16px;
+    background: #64748b;
+    border-radius: 0 0 1.2rem 1.2rem;
+    border-top: 2px solid #94a3b8;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+    z-index: 10;
+}
+
+/* 📟 Tablet Portrait Mode */
+body.device-tablet-portrait .game-area {
+    width: 600px;
+    height: 85vh;
+    max-height: 840px;
+    border: 22px solid #1e293b !important;
+    border-radius: 2.5rem !important;
+}
+
+/* 📟 Tablet Landscape Mode */
+body.device-tablet-landscape .game-area {
+    width: 850px;
+    height: 600px;
+    max-width: 90%;
+    border: 22px solid #1e293b !important;
+    border-radius: 2.5rem !important;
+}
+
+/* 📱 Mobile Portrait Mode */
+body.device-mobile-portrait .game-area {
+    width: 380px;
+    height: 82vh;
+    max-height: 780px;
+    border: 18px solid #0f172a !important;
+    border-radius: 3.2rem !important;
+}
+/* Screen camera notch for mobile portrait */
+body.device-mobile-portrait .game-area::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 12px;
+    background: #0f172a;
+    border-radius: 0 0 0.8rem 0.8rem;
+    z-index: 10;
+}
+
+/* 📱 Mobile Landscape Mode */
+body.device-mobile-landscape .game-area {
+    width: 780px;
+    height: 380px;
+    max-width: 90%;
+    border: 18px solid #0f172a !important;
+    border-radius: 3.2rem !important;
+}
+/* Screen camera notch for mobile landscape */
+body.device-mobile-landscape .game-area::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -12px;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 100px;
+    background: #0f172a;
+    border-radius: 0 0.8rem 0.8rem 0;
+    z-index: 10;
+}
+

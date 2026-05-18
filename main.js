@@ -600,8 +600,9 @@ const Game = {
 
 window.onload = () => {
     if (Auth.checkSession()) {
-        // Already logged in — inject badge and start game
+        // Already logged in — inject badge, device simulator controls, and start game
         AuthUI.injectUserBadge();
+        AuthUI.injectDeviceSelector();
         Game.init();
     } else {
         // Show auth screen first; it will call Game.init() on success
